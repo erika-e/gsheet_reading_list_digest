@@ -1,3 +1,30 @@
+function getSetting(setting) {
+  // this function is used to declare key variables to get your digest script up and running
+  // I didn't optimize this script very well, so this process is manual
+  // You'll need to do this before you do anything else
+  
+    let returnValue = '';
+  
+    switch (setting) {
+      case 'URL':
+        // paste the URL of the spreadsheet you have created between the quotations
+        returnValue = 'https://docs.google.com/spreadsheets/d/1N7AFvQ1mEVlmsHu1Am09lc77ISvIWGFNhN1pl1Tajog/';
+        break;
+      case 'digestMax':
+        // this is the maximum number of links you can receive on any one day
+        returnValue = 3;
+        break;
+      case 'emailDestination':
+        // this is the email address which will receive your digest email
+        returnValue = 'erika.swartz@shawinc.com';
+        break;
+      default:
+        Logger.log('no match to case statement');
+        break;
+    }
+    return returnValue;
+  }
+
 function onOpen() {
   const menu = SpreadsheetApp.getUi().createMenu('Digest Menu');
 
@@ -43,29 +70,4 @@ function setupReadingList(spreadsheet) {
   spreadsheet.getActiveRangeList().setNumberFormat('M/d/yyyy');
 }
 
-function getSetting(setting) {
-// this function is used to declare key variables to get your digest script up and running
-// I didn't optimize this script very well, so this process is manual
-// You'll need to do this before you do anything else
 
-  let returnValue = '';
-
-  switch (setting) {
-    case 'URL':
-      // paste the URL of the spreadsheet you have created between the quotations
-      returnValue = 'https://docs.google.com/spreadsheets/d/1N7AFvQ1mEVlmsHu1Am09lc77ISvIWGFNhN1pl1Tajog/';
-      break;
-    case 'digestMax':
-      // this is the maximum number of links you can receive on any one day
-      returnValue = 3;
-      break;
-    case 'emailDestination':
-      // this is the email address which will receive your digest email
-      returnValue = 'erika.swartz@shawinc.com';
-      break;
-    default:
-      Logger.log('no match to case statement');
-      break;
-  }
-  return returnValue;
-}
