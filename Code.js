@@ -2,62 +2,40 @@ function setProperties() {
   //this function sets the script properties for access later
   PropertiesService.getScriptProperties().setProperty('url', SpreadsheetApp.getActiveSpreadsheet().getUrl());
   PropertiesService.getScriptProperties().setProperty('email', Session.getActiveUser().getEmail())
-  const maxLinks = browser.inputbox("Enter the max # of articles you'd like to receive in a digest");
+  
+  var ui = SpreadsheetApp.getUi();
+  var result = ui.prompt(
+      'Enter the max # of articles in a digest email:',
+      ui.ButtonSet.OK);
+  
+  var maxLinks = result.getResponseText();
   PropertiesService.getScriptProperties().setProperty('maxLinks', maxLinks)
 }
 
-function getSetting(settingKey) {
+function getProperty(key) {
   // this function calls the property value back from the script properties by key
-  
-  const returnValue = PropertiesService.getScriptProperties().getProperty(settingKey)
-  
-    switch (setting) {
-      case 'URL':
-        // paste the URL of the spreadsheet you have created between the quotations
-        returnValue = 'https://docs.google.com/spreadsheets/d/1N7AFvQ1mEVlmsHu1Am09lc77ISvIWGFNhN1pl1Tajog/';
-        break;
-      case 'digestMax':
-        // this is the maximum number of links you can receive on any one day
-        returnValue = 3;
-        break;
-      case 'emailDestination':
-        // this is the email address which will receive your digest email
-        returnValue = 'erika.swartz@shawinc.com';
-        break;
-      default:
-        Logger.log('no match to case statement');
-        break;
-    }
-    return returnValue;
+  // valid keys are 
+  const returnValue = PropertiesService.getScriptProperties().getProperty(key)
+  return returnValue;
   }
 
 function onOpen() {
   const menu = SpreadsheetApp.getUi().createMenu('Digest Menu');
 
-  menu.addItem('Set Digest Properties', 'setProperties')
-    .addItem('Run Setup', 'setupSheets')
+  menu.addItem('Run Initial Setup','setupSheets')
+    .addItem('Reset Digest Properties', 'setProperties')
     .addItem('Add template variable', 'addTemplateVariable')
     .addSeparator()
     .addItem('Copy Sheets', 'templateCopier')
     .addToUi();
 }
 
-function testCode() {
-  const test = getSetting('URL');
+function setupDigest() {
+  // this menu function sets up the digest
 
-  const spreadsheet = SpreadsheetApp.openByUrl(getSetting('URL'));
-  const data = spreadsheet.getSheetByName('RLT').getRange('B2:G17').getValues();
-
-  Logger.log(data);
-}
-
-function setupSheets() {
-  // this set of commands creates the reading list sheets and preloads them with some links and formulas
-  const spreadsheet = SpreadsheetApp.openByUrl(getSetting('URL'));
+  setProperties()
+  const spreadsheet = getProperty('url');
   spreadsheet.insertSheet('ReadingList');
-  // spreadsheet.insertSheet("DataValidation")
-  // spreadsheet.insertSheet("Reporting")
-
   setupReadingList(spreadsheet);
 }
 
