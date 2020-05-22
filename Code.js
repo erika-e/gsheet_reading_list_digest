@@ -1,9 +1,15 @@
-function getSetting(setting) {
-  // this function is used to declare key variables to get your digest script up and running
-  // I didn't optimize this script very well, so this process is manual
-  // You'll need to do this before you do anything else
+function setProperties() {
+  //this function sets the script properties for access later
+  PropertiesService.getScriptProperties().setProperty('url', SpreadsheetApp.getActiveSpreadsheet().getUrl());
+  PropertiesService.getScriptProperties().setProperty('email', Session.getActiveUser().getEmail())
+  const maxLinks = browser.inputbox("Enter the max # of articles you'd like to receive in a digest");
+  PropertiesService.getScriptProperties().setProperty('maxLinks', maxLinks)
+}
+
+function getSetting(settingKey) {
+  // this function calls the property value back from the script properties by key
   
-    let returnValue = '';
+  const returnValue = PropertiesService.getScriptProperties().getProperty(settingKey)
   
     switch (setting) {
       case 'URL':
@@ -28,7 +34,8 @@ function getSetting(setting) {
 function onOpen() {
   const menu = SpreadsheetApp.getUi().createMenu('Digest Menu');
 
-  menu.addItem('Run Setup', 'setupSheet')
+  menu.addItem('Set Digest Properties', 'setProperties')
+    .addItem('Run Setup', 'setupSheets')
     .addItem('Add template variable', 'addTemplateVariable')
     .addSeparator()
     .addItem('Copy Sheets', 'templateCopier')
