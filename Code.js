@@ -22,7 +22,7 @@ function getProperty(key) {
 function onOpen() {
   const menu = SpreadsheetApp.getUi().createMenu('Digest Menu');
 
-  menu.addItem('Run Initial Setup','setupSheets')
+  menu.addItem('Run Initial Setup','setupDigest')
     .addItem('Reset Digest Properties', 'setProperties')
     .addItem('Add template variable', 'addTemplateVariable')
     .addSeparator()
@@ -32,11 +32,18 @@ function onOpen() {
 
 function setupDigest() {
   // this menu function sets up the digest
-
+ 
+  //set the digest properties
   setProperties()
-  const spreadsheet = getProperty('url');
+
+  //add the default links
+  const spreadsheet = SpreadsheetApp.openByUrl(getProperty('url'))
   spreadsheet.insertSheet('ReadingList');
   setupReadingList(spreadsheet);
+
+  //create the validation sheet
+
+  //create the data sheet
 }
 
 function setupDataValidation(spreadsheet) {
