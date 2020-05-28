@@ -51,11 +51,11 @@ function setupDataValidation() {
   const dataValidation = spreadsheet.getSheetByName('DataValidation')
 
   //set headers 
-  dataValidation.getRange("A1:D1").setValues(["Source", "Category", "Status", "Quality"])
+  dataValidation.getRange("A1:D1").setValues([["Source", "Category", "Status", "Quality"]])
   //add data validation formulas 
-  dataValidation.getRange("A2:C2").setFormulas(["=SORT(UNIQUE(ReadingList!C2:C),1,TRUE)", "=SORT(UNIQUE(ReadingList!F2:F),1,TRUE)", "=SORT(UNIQUE(ReadingList!G2:G),1,TRUE)"])
+  dataValidation.getRange("A2:C2").setFormulas([["=SORT(UNIQUE(ReadingList!C2:C),1,TRUE)", "=SORT(UNIQUE(ReadingList!F2:F),1,TRUE)", "=SORT(UNIQUE(ReadingList!G2:G),1,TRUE)"]])
   //add quality defaults
-  dataValidation.getRange("D2:D6").setValues([[1.0], [2.0], [3.0], [4.0], [5.0]])
+  dataValidation.getRange("D2:D6").setValues([[1], [2], [3], [4], [5]])
 }
 
 function logDataValidation(){
