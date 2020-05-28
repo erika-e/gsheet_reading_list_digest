@@ -8,6 +8,9 @@
     "macros": [{
       "menuName": "formatdate",
       "functionName": "formatdate"
+    }, {
+      "menuName": "Add Data Validation",
+      "functionName": "AddDataValidation"
     }]
   }
 }
