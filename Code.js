@@ -1,5 +1,6 @@
 function setProperties() {
   //this function sets the script properties for access later
+  //the email address it will use by default is the user's associated google acount
   PropertiesService.getScriptProperties().setProperty('url', SpreadsheetApp.getActiveSpreadsheet().getUrl());
   PropertiesService.getScriptProperties().setProperty('email', Session.getActiveUser().getEmail())
   
@@ -14,7 +15,7 @@ function setProperties() {
 
 function getProperty(key) {
   // this function calls the property value back from the script properties by key
-  // valid keys are 
+  // valid keys are 'url', 'maxLinks', and 'email'
   const returnValue = PropertiesService.getScriptProperties().getProperty(key)
   return returnValue;
   }
@@ -31,7 +32,8 @@ function onOpen() {
 }
 
 function setupDigest() {
-  // this menu function sets up the digest
+  // this menu function sets up the digest for the first time
+
 
   setProperties()
   const spreadsheet = SpreadsheetApp.openByUrl(getProperty('url'))
@@ -41,6 +43,32 @@ function setupDigest() {
 
 function setupDataValidation(spreadsheet) {
 
+}
+
+function setupDataValidation() {
+  const spreadsheet = SpreadsheetApp.openByUrl(getProperty('url'))
+  spreadsheet.insertSheet('DataValidation');
+  const dataValidation = spreadsheet.getSheetByName('DataValidation')
+
+  //set headers 
+  dataValidation.getRange("A1:D1").setValues(["Source", "Category", "Status", "Quality"])
+  //add data validation formulas 
+  dataValidation.getRange("A2:C2").setFormulas(["=SORT(UNIQUE(ReadingList!C2:C),1,TRUE)", "=SORT(UNIQUE(ReadingList!F2:F),1,TRUE)", "=SORT(UNIQUE(ReadingList!G2:G),1,TRUE)"])
+  //add quality defaults
+  dataValidation.getRange("D2:D6").setValues([[1.0], [2.0], [3.0], [4.0], [5.0]])
+}
+
+function logDataValidation(){
+  const spreadsheet = SpreadsheetApp.openByUrl(getProperty('url'))
+  
+  headers = spreadsheet.getSheetByName('DataValidation').getRange("A1:D1").getValues()
+  Logger.log(headers)
+  
+  formulas = spreadsheet.getSheetByName('DataValidation').getRange("A2:C2").getFormulas()
+  Logger.log(formulas)
+  
+  quality = spreadsheet.getSheetByName('DataValidation').getRange("D2:D6").getValues()
+  Logger.log(quality)
 }
 
 
