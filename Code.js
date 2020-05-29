@@ -38,14 +38,14 @@ function setupDigest() {
   const spreadsheet = SpreadsheetApp.openByUrl(getProperty('url'))
   const readingList = spreadsheet.insertSheet('ReadingList')
   const dataValidation = spreadsheet.insertSheet('DataValidation');
-  
+  const activityData = spreadsheet.insertSheet('ActivityData')
+
   //populate sample reading list and data validation
   populateReadingList(readingList);
   populateDataValidation(dataValidation);
   //format and add data validation
   formatReadingList(readingList, dataValidation)
 }
-
 
 function populateDataValidation(dataValidation) {
   //this function populates the headers for the data validation
