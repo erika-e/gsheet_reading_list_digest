@@ -36,7 +36,7 @@ function setupDigest() {
   //add popup to warn that this will reset everything
   setProperties()
   const spreadsheet = SpreadsheetApp.openByUrl(getProperty('url'))
-  spreadsheet.insertSheet('ReadingList');
+  spreadsheet.insertSheet('ReadingList')
   spreadsheet.insertSheet('DataValidation');
   populateReadingList(spreadsheet);
   populateDataValidation(spreadsheet);
@@ -52,7 +52,7 @@ function populateDataValidation(spreadsheet) {
   //add data validation formulas 
   dataValidation.getRange("A2:C2").setFormulas([["=SORT(UNIQUE(ReadingList!C2:C),1,TRUE)", "=SORT(UNIQUE(ReadingList!F2:F),1,TRUE)", "=SORT(UNIQUE(ReadingList!G2:G),1,TRUE)"]])
   //add quality defaults
-  dataValidation.getRange("D2:D6").setValues([[1], [2], [3], [4], [5]])
+  dataValidation.getRange("D2:D6").setValues([[1.0], [2.0], [3.0], [4.0], [5.0]]).setNumberFormat("#")
 }
 
 function populateReadingList(spreadsheet) {
