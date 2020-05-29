@@ -5,12 +5,6 @@
   "exceptionLogging": "STACKDRIVER",
   "runtimeVersion": "V8",
   "sheets": {
-    "macros": [{
-      "menuName": "formatdate",
-      "functionName": "formatdate"
-    }, {
-      "menuName": "Add Data Validation",
-      "functionName": "AddDataValidation"
-    }]
+
   }
 }
