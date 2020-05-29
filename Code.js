@@ -73,16 +73,17 @@ function populateActivityData() {
   const activityData = spreadsheet.getSheetByName('ActivityData')
 
   //set header row data
-  headerRow = [['Daily Added Counts', '', 'Daily Read Counts', '', '', 'Data By Date', '', '', '', '', '', '', '', 'Data By Week']]
-  activityData.getRange('A1:N1').setvalues(headerRow)
+  activityData.getRange('A1:N1').setValues([['Daily Added Counts', '', 'Daily Read Counts', '', '', 'Data By Date', '', '', '', '', '', '', '', 'Data By Week']])
 
   //add secondary headers
-  secondaryHeader = [['Date', 'Week-Year', 'Added', 'Read', 'Cumulative Added', 'Cumulative Read', 'Backlog']]
-  activityData.getRange('F2:L2').setValues(secondaryHeader)
+  activityData.getRange('F2:L2').setValues([['Date', 'Week-Year', 'Added', 'Read', 'Cumulative Added', 'Cumulative Read', 'Backlog']])
 
-  //set the initial query formulas 
+  //set the fprmulas
   activityData.getRange('A2').setFormulas([['=QUERY(ReadingList!A:J, "SELECT TODATE(D), COUNT(B) WHERE TODATE(D) IS NOT NULL GROUP BY TODATE(D) LABEL TODATE(D) \'Date\', COUNT(B) \'Number Added\' " )']])
-
+  activityData.getRange('C2').setFormulas([['=QUERY(ReadingList!A:J, "SELECT TODATE(E), COUNT(B) WHERE TODATE(E) IS NOT NULL GROUP BY TODATE(E) LABEL TODATE(E) \'Date\', COUNT(B) \'Number Read\' " )']])
+  activityData.getRange('N2').setFormulas([['=QUERY(F3:L, "SELECT G, MIN(F), SUM(H), SUM(I), MAX(J), MAX(K), MAX(L) WHERE G IS NOT NULL GROUP BY G ORDER BY MIN(F) ASC LABEL G \'Week-Year\', MIN(F) \'Week Start\', SUM(H) \'Added\', SUM(I) \'Read\', MAX(J) \'Cumulative Added\', MAX(K) \'Cumulative Read\', MAX(L) \'Backlog\'")']])
+  activityData.getRange('F3:L3').setFormulas([['=MIN(A3:A)', '=IF(NOT(ISBLANK(F3)),CONCATENATE(IF(LEN(WEEKNUM(F3))<2,CONCATENATE("0",WEEKNUM(F3)),TO_TEXT(WEEKNUM(F3))), "-", TO_TEXT(YEAR(F3))),"")', '=ARRAYFORMULA(IF(NOT(ISBLANK(F3:F)),IFERROR(VLOOKUP(F3:F,$A$3:B,2,FALSE),0),""))', '=ARRAYFORMULA(IF(NOT(ISBLANK(F3:F)),IFERROR(VLOOKUP(F3:F,$C$3:D,2,FALSE),0),""))', '=IF(LEN(H3)>0,SUM($H$3:H3),"")', '=IF(LEN(H3)>0,SUM($I$3:I3),"")', '=IF(LEN(H3)>0,J3-K3,"")']])
+  activityData.getRange('F4').setFormulas([['=ARRAYFORMULA(ADD(F3,ROW(INDIRECT("A1:A"&INT(NOW()-F3)))))']])
 }
 
 function formatReadingList(readingList, dataValidation) {
