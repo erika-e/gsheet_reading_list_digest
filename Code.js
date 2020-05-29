@@ -65,6 +65,20 @@ function populateReadingList(spreadsheet) {
   spreadsheet.getSheetByName('ReadingList').getRange('B2:G17').setValues(readingListData);
   spreadsheet.getRange('D2:E17').activate();
   spreadsheet.getActiveRangeList().setNumberFormat('M/d/yyyy');
+} 
+
+function formatReadingList() {
+  //this function adds formatting and data validation to the reading list 
+  const spreadsheet = SpreadsheetApp.openByUrl(getProperty('url'))
+  const readingList = spreadsheet.getSheetByName('ReadingList')
+  const dataValidation = spreadsheet.getSheetByName('DataValidation')
+
+  readingList.getRange('D2:E').setNumberFormat("MM/DD/YYYY")
+  //add source data validation 
+  readingList.getRange('C2:C').setDataValidation(SpreadsheetApp.newDataValidation()
+  .setAllowInvalid(true)
+  .requireValueInRange(dataValidation.getRange('A2:A'),true)
+  .build());
 }
 
 
