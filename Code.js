@@ -68,6 +68,19 @@ function populateReadingList(readingList) {
   readingList.getRange('B2:G17').setValues(readingListData);
 } 
 
+function populateActivityData() {
+  const spreadsheet = SpreadsheetApp.openByUrl(getProperty('url'))
+  const activityData = spreadsheet.getSheetByName('ActivityData')
+
+  header_row = ['Daily Added Counts', '', 'Daily Read Counts', '', '', 'Data By Date', '', '', '', '', '', '', '', 'Data By Week']
+
+  activityData.getRange('A1:N1').setvalues(header_row)
+
+
+
+
+}
+
 function formatReadingList(readingList, dataValidation) {
   //this function adds formatting and data validation to the reading list 
 
@@ -101,7 +114,6 @@ function logActivity()
  }
   Logger.log(header_row)
   
-  header_row = ['Daily Added Counts', '', 'Daily Read Counts', '', '', 'Data By Date', '', '', '', '', '', '', '', 'Data By Week']
   
 }
 
