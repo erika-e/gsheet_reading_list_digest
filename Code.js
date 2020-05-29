@@ -72,12 +72,16 @@ function populateActivityData() {
   const spreadsheet = SpreadsheetApp.openByUrl(getProperty('url'))
   const activityData = spreadsheet.getSheetByName('ActivityData')
 
-  header_row = [['Daily Added Counts', '', 'Daily Read Counts', '', '', 'Data By Date', '', '', '', '', '', '', '', 'Data By Week']]
+  //set header row data
+  headerRow = [['Daily Added Counts', '', 'Daily Read Counts', '', '', 'Data By Date', '', '', '', '', '', '', '', 'Data By Week']]
+  activityData.getRange('A1:N1').setvalues(headerRow)
 
-  activityData.getRange('A1:N1').setvalues(header_row)
+  //add secondary headers
+  secondaryHeader = [['Date', 'Week-Year', 'Added', 'Read', 'Cumulative Added', 'Cumulative Read', 'Backlog']]
+  activityData.getRange('F2:L2').setValues(secondaryHeader)
 
-
-
+  //set the initial query formulas 
+  activityData.getRange('A2').setFormulas([['=QUERY(ReadingList!A:J, "SELECT TODATE(D), COUNT(B) WHERE TODATE(D) IS NOT NULL GROUP BY TODATE(D) LABEL TODATE(D) \'Date\', COUNT(B) \'Number Added\' " )']])
 
 }
 
@@ -104,15 +108,15 @@ function addDataValidation(targetSheet, sourceSheet, targetA1, sourceA1) {
 
 function logActivity()
 {
- const spreadsheet = SpreadsheetApp.getActiveSpreadsheet() 
- const adt = spreadsheet.getSheetByName('ADT')
- 
- const header_row = adt.getRange('A1:N1').getValues() 
- 
- for (i=0; i<=header_row[0].length - 1; i++) {
-   header_row[0][i] = addQuotes(header_row[0][i])
- }
-  Logger.log(header_row)
+  const spreadsheet = SpreadsheetApp.getActiveSpreadsheet() 
+  const adt = spreadsheet.getSheetByName('ADT')
+  
+  const header_row = adt.getRange('A2').getFormulas() 
+  
+  for (i=0; i<=header_row[0].length - 1; i++) {
+    header_row[0][i] = addQuotes(header_row[0][i])
+  }
+   Logger.log(header_row)
   
   
 }
