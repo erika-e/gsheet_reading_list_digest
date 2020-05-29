@@ -75,20 +75,20 @@ function formatReadingList() {
 
   readingList.getRange('D2:E').setNumberFormat("MM/DD/YYYY")
   //add source data validation 
-  readingList.getRange('C2:C').setDataValidation(SpreadsheetApp.newDataValidation()
-  .setAllowInvalid(true)
-  .requireValueInRange(dataValidation.getRange('A2:A'),true)
-  .build());
+  //readingList.getRange('C2:C').setDataValidation(SpreadsheetApp.newDataValidation()
+  //.setAllowInvalid(true)
+  //.requireValueInRange(dataValidation.getRange('A2:A'),true)
+  //.build());
+
+  addDataValidation(readingList, dataValidation, 'C2:C', 'A2:A');
 }
 
-
-function AddDataValidation() {
-  var spreadsheet = SpreadsheetApp.getActive();
-  spreadsheet.getRange('E4').activate();
-  spreadsheet.setActiveSheet(spreadsheet.getSheetByName('ReadingList'), true);
-  spreadsheet.getRange('B2:B22').activate();
-  spreadsheet.getRange('ReadingList!F2:F1000').setDataValidation(SpreadsheetApp.newDataValidation()
+function addDataValidation(targetSheet, sourceSheet, targetA1, sourceA1) {
+  targetSheet.getRange(targetA1).setDataValidation(SpreadsheetApp.newDataValidation()
   .setAllowInvalid(true)
-  .requireValueInRange(spreadsheet.getRange('\'Data Validation - Temp Template\'!$B$2:$B$22'), true)
-  .build());
-};
+  .requireValueInRange(sourceSheet.getRange(sourceA1),true)
+  .build())
+
+
+
+}
