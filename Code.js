@@ -80,7 +80,12 @@ function formatReadingList() {
   //.requireValueInRange(dataValidation.getRange('A2:A'),true)
   //.build());
 
+  //populate data validation columns
   addDataValidation(readingList, dataValidation, 'C2:C', 'A2:A');
+  addDataValidation(readingList,dataValidation, 'F2:F', 'B2:B');
+  addDataValidation(readingList, dataValidation, 'G2:G', 'C2:C');
+  addDataValidation(readingList, dataValidation, 'H2:H', 'D2:D6');
+
 }
 
 function addDataValidation(targetSheet, sourceSheet, targetA1, sourceA1) {
