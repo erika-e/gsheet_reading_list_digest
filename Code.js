@@ -97,13 +97,15 @@ function logActivity()
  const header_row = adt.getRange('A1:N1').getValues() 
  
  for (i=0; i<=header_row[0].length - 1; i++) {
-   Logger.log(makeString(header_row[0][i]))
-  Logger.log(header_row[0][i])
+   header_row[0][i] = addQuotes(header_row[0][i])
  }
+  Logger.log(header_row)
+  
+  header_row = ['Daily Added Counts', '', 'Daily Read Counts', '', '', 'Data By Date', '', '', '', '', '', '', '', 'Data By Week']
   
 }
 
-function makeString(value) {
+function addQuotes(value) {
   
   if (value.length = 0) {
    return "\'\'"
