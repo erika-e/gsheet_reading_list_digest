@@ -33,21 +33,18 @@ function onOpen() {
 
 function setupDigest() {
   // this menu function sets up the digest for the first time
-
-
+  //add popup to warn that this will reset everything
   setProperties()
   const spreadsheet = SpreadsheetApp.openByUrl(getProperty('url'))
   spreadsheet.insertSheet('ReadingList');
-  setupReadingList(spreadsheet);
-}
-
-function setupDataValidation(spreadsheet) {
-
-}
-
-function setupDataValidation() {
-  const spreadsheet = SpreadsheetApp.openByUrl(getProperty('url'))
   spreadsheet.insertSheet('DataValidation');
+  populateReadingList(spreadsheet);
+  populateDataValidation(spreadsheet);
+}
+
+
+function populateDataValidation(spreadsheet) {
+  //this function populates the headers for the data validation
   const dataValidation = spreadsheet.getSheetByName('DataValidation')
 
   //set headers 
@@ -58,21 +55,8 @@ function setupDataValidation() {
   dataValidation.getRange("D2:D6").setValues([[1], [2], [3], [4], [5]])
 }
 
-function logDataValidation(){
-  const spreadsheet = SpreadsheetApp.openByUrl(getProperty('url'))
-  
-  headers = spreadsheet.getSheetByName('DataValidation').getRange("A1:D1").getValues()
-  Logger.log(headers)
-  
-  formulas = spreadsheet.getSheetByName('DataValidation').getRange("A2:C2").getFormulas()
-  Logger.log(formulas)
-  
-  quality = spreadsheet.getSheetByName('DataValidation').getRange("D2:D6").getValues()
-  Logger.log(quality)
-}
-
-
-function setupReadingList(spreadsheet) {
+function populateReadingList(spreadsheet) {
+  // this function populates the reading list with some sample content
   spreadsheet.getSheetByName('ReadingList');
   const readingListHeaders = [['Source Link', 'Link', 'Source', 'Date Added', 'Date Read', 'Category', 'Status', 'Quality', 'Short Description', 'Comment']];
   spreadsheet.getSheetByName('ReadingList').getRange(1, 1, 1, 10).setValues(readingListHeaders);
