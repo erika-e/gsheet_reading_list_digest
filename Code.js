@@ -37,15 +37,18 @@ function setupDigest() {
   setProperties()
   const spreadsheet = SpreadsheetApp.openByUrl(getProperty('url'))
   spreadsheet.insertSheet('ReadingList')
-  spreadsheet.insertSheet('DataValidation');
+  const dataValidation = spreadsheet.insertSheet('DataValidation');
   populateReadingList(spreadsheet);
-  populateDataValidation(spreadsheet);
+  populateDataValidation(dataValidation);
+
+  formatReadingList(spreadsheet.getSheetByName('ReadingList'), dataValidation)
+
 }
 
 
-function populateDataValidation(spreadsheet) {
+function populateDataValidation(dataValidation) {
   //this function populates the headers for the data validation
-  const dataValidation = spreadsheet.getSheetByName('DataValidation')
+  //const dataValidation = spreadsheet.getSheetByName('DataValidation')
 
   //set headers 
   dataValidation.getRange("A1:D1").setValues([["Source", "Category", "Status", "Quality"]])
@@ -67,29 +70,23 @@ function populateReadingList(spreadsheet) {
   spreadsheet.getActiveRangeList().setNumberFormat('M/d/yyyy');
 } 
 
-function formatReadingList() {
+function formatReadingList(readingList, dataValidation) {
   //this function adds formatting and data validation to the reading list 
-  const spreadsheet = SpreadsheetApp.openByUrl(getProperty('url'))
-  const readingList = spreadsheet.getSheetByName('ReadingList')
-  const dataValidation = spreadsheet.getSheetByName('DataValidation')
 
   //format the date column
   readingList.getRange('D2:E').setNumberFormat("MM/DD/YYYY")
 
   //populate data validation columns
   addDataValidation(readingList, dataValidation, 'C2:C', 'A2:A');
-  addDataValidation(readingList,dataValidation, 'F2:F', 'B2:B');
+  addDataValidation(readingList, dataValidation, 'F2:F', 'B2:B');
   addDataValidation(readingList, dataValidation, 'G2:G', 'C2:C');
   addDataValidation(readingList, dataValidation, 'H2:H', 'D2:D6');
-
 }
 
 function addDataValidation(targetSheet, sourceSheet, targetA1, sourceA1) {
+  //use the specified ranges and sheets to configure data validation with a drop down menu
   targetSheet.getRange(targetA1).setDataValidation(SpreadsheetApp.newDataValidation()
   .setAllowInvalid(true)
   .requireValueInRange(sourceSheet.getRange(sourceA1),true)
   .build())
-
-
-
 }
