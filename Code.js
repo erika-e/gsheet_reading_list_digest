@@ -73,12 +73,8 @@ function formatReadingList() {
   const readingList = spreadsheet.getSheetByName('ReadingList')
   const dataValidation = spreadsheet.getSheetByName('DataValidation')
 
+  //format the date column
   readingList.getRange('D2:E').setNumberFormat("MM/DD/YYYY")
-  //add source data validation 
-  //readingList.getRange('C2:C').setDataValidation(SpreadsheetApp.newDataValidation()
-  //.setAllowInvalid(true)
-  //.requireValueInRange(dataValidation.getRange('A2:A'),true)
-  //.build());
 
   //populate data validation columns
   addDataValidation(readingList, dataValidation, 'C2:C', 'A2:A');
