@@ -72,7 +72,7 @@ function populateActivityData() {
   const spreadsheet = SpreadsheetApp.openByUrl(getProperty('url'))
   const activityData = spreadsheet.getSheetByName('ActivityData')
 
-  header_row = ['Daily Added Counts', '', 'Daily Read Counts', '', '', 'Data By Date', '', '', '', '', '', '', '', 'Data By Week']
+  header_row = [['Daily Added Counts', '', 'Daily Read Counts', '', '', 'Data By Date', '', '', '', '', '', '', '', 'Data By Week']]
 
   activityData.getRange('A1:N1').setvalues(header_row)
 
