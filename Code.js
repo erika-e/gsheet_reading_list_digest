@@ -6,7 +6,7 @@ function setProperties() {
   
   var ui = SpreadsheetApp.getUi();
   var result = ui.prompt(
-      'Enter the max # of articles in a digest email:',
+      'Running this function will overwrite everything in the readng list. \n Use set properties to change max links. \n Enter the max # of articles in a digest email:',
       ui.ButtonSet.OK);
   
   var maxLinks = result.getResponseText();
@@ -87,4 +87,28 @@ function addDataValidation(targetSheet, sourceSheet, targetA1, sourceA1) {
   .setAllowInvalid(true)
   .requireValueInRange(sourceSheet.getRange(sourceA1),true)
   .build())
+}
+
+function logActivity()
+{
+ const spreadsheet = SpreadsheetApp.getActiveSpreadsheet() 
+ const adt = spreadsheet.getSheetByName('ADT')
+ 
+ const header_row = adt.getRange('A1:N1').getValues() 
+ 
+ for (i=0; i<=header_row[0].length - 1; i++) {
+   Logger.log(makeString(header_row[0][i]))
+  Logger.log(header_row[0][i])
+ }
+  
+}
+
+function makeString(value) {
+  
+  if (value.length = 0) {
+   return "\'\'"
+  }
+  else {
+   return "\'" + value + "\'" 
+  }
 }
