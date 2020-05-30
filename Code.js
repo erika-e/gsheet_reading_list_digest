@@ -90,6 +90,41 @@ function populateActivityData() {
   activityData.getRange('J3:L3').autoFill(activityData.getRange('J3:L'), SpreadsheetApp.AutoFillSeries.DEFAULT_SERIES);
 }
 
+function addChart() {
+  const spreadsheet = SpreadsheetApp.openByUrl(getProperty('url'))
+  const activityData = spreadsheet.getSheetByName('ActivityData')
+
+  var chart = activityData.newChart()
+  .asComboChart()
+  .addRange(activityData.getRange('N2:T40'))
+  .setMergeStrategy(Charts.ChartMergeStrategy.MERGE_COLUMNS)
+  .setTransposeRowsAndColumns(false)
+  .setNumHeaders(-1)
+  .setHiddenDimensionStrategy(Charts.ChartHiddenDimensionStrategy.IGNORE_BOTH)
+  .setOption('bubble.stroke', '#000000')
+  .setOption('useFirstColumnAsDomain', true)
+  .setOption('title', 'Weekly Reading Stats')
+  .setOption('annotations.domain.textStyle.color', '#808080')
+  .setOption('textStyle.color', '#000000')
+  .setOption('legend.textStyle.color', '#191919')
+  .setOption('titleTextStyle.color', '#757575')
+  .setOption('annotations.total.textStyle.color', '#808080')
+  .setOption('hAxis.textStyle.color', '#000000')
+  .setOption('hAxis.titleTextStyle.color', '#000000')
+  .setYAxisTitle('Articles Read')
+  .setOption('vAxes.0.textStyle.color', '#000000')
+  .setOption('vAxes.0.titleTextStyle.color', '#000000')
+  .setOption('vAxes.1.title', 'Cumulative and Backlog Total')
+  .setOption('vAxes.1.textStyle.color', '#000000')
+  .setOption('vAxes.1.titleTextStyle.color', '#000000')
+  .setOption('series.1.targetAxisIndex', 1)
+  .setOption('series.2.targetAxisIndex', 1)
+  .setPosition(1, 21, 3, 14)
+  .build();
+  activityData.insertChart(chart);
+
+}
+
 function formatReadingList(readingList, dataValidation) {
   //this function adds formatting and data validation to the reading list 
 
