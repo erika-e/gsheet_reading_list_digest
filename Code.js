@@ -43,11 +43,9 @@ function setupDigest() {
   //populate sample reading list and data validation
   populateReadingList(readingList);
   populateDataValidation(dataValidation);
-  populateActivityData();
+  populateActivityData(activityData);
   //format and add data validation
   formatReadingList(readingList, dataValidation)
-
-
 }
 
 function populateDataValidation(dataValidation) {
@@ -71,10 +69,7 @@ function populateReadingList(readingList) {
   readingList.getRange('B2:G17').setValues(readingListData);
 } 
 
-function populateActivityData() {
-  const spreadsheet = SpreadsheetApp.openByUrl(getProperty('url'))
-  const activityData = spreadsheet.getSheetByName('ActivityData')
-
+function populateActivityData(activityData) {
   //set header row data
   activityData.getRange('A1:N1').setValues([['Daily Added Counts', '', 'Daily Read Counts', '', '', 'Data By Date', '', '', '', '', '', '', '', 'Data By Week']])
 
