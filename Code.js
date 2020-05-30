@@ -43,8 +43,11 @@ function setupDigest() {
   //populate sample reading list and data validation
   populateReadingList(readingList);
   populateDataValidation(dataValidation);
+  populateActivityData();
   //format and add data validation
   formatReadingList(readingList, dataValidation)
+
+
 }
 
 function populateDataValidation(dataValidation) {
@@ -88,11 +91,13 @@ function populateActivityData() {
   //autofill formulas down the sheet 
   activityData.getRange('G3').autoFill(activityData.getRange('G3:G'), SpreadsheetApp.AutoFillSeries.DEFAULT_SERIES);
   activityData.getRange('J3:L3').autoFill(activityData.getRange('J3:L'), SpreadsheetApp.AutoFillSeries.DEFAULT_SERIES);
+
+  //create the chart of the data 
+  addChart(activityData)
 }
 
-function addChart() {
-  const spreadsheet = SpreadsheetApp.openByUrl(getProperty('url'))
-  const activityData = spreadsheet.getSheetByName('ActivityData')
+function addChart(activityData) {
+  //add a chart using the weekly data
 
   var chart = activityData.newChart()
   .asComboChart()
