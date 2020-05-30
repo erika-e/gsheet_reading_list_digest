@@ -8,6 +8,9 @@
     "macros": [{
       "menuName": "makechart",
       "functionName": "makechart"
+    }, {
+      "menuName": "remove unneeded series",
+      "functionName": "removeunneededseries"
     }]
   }
 }
