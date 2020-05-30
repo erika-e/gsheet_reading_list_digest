@@ -36,9 +36,9 @@ function setupDigest() {
   //add popup to warn that this will reset everything
   setProperties()
   const spreadsheet = SpreadsheetApp.openByUrl(getProperty('url'))
-  const readingList = spreadsheet.insertSheet('ReadingList')
-  const dataValidation = spreadsheet.insertSheet('DataValidation');
-  const activityData = spreadsheet.insertSheet('ActivityData')
+  const activityData = createSheetDeleteExisting('ActivityData')
+  const dataValidation = createSheetDeleteExisting('DataValidation');
+  const readingList = createSheetDeleteExisting('ReadingList')
 
   //populate sample reading list and data validation
   populateReadingList(readingList);
@@ -46,6 +46,19 @@ function setupDigest() {
   populateActivityData(activityData);
   //format and add data validation
   formatReadingList(readingList, dataValidation)
+}
+
+function createSheetDeleteExisting(name) {
+const spreadsheet = SpreadsheetApp.openByUrl(getProperty('url'))
+const sheet = spreadsheet.getSheetByName(name)
+if (sheet == null) {
+  return spreadsheet.insertSheet(name)
+}
+else {
+  spreadsheet.deleteSheet(spreadsheet.getSheetByName(name))
+  return spreadsheet.insertSheet(name)
+}
+
 }
 
 function populateDataValidation(dataValidation) {
@@ -139,7 +152,6 @@ function addChart(activityData) {
   .setPosition(2, 21, 3, 2)
   .build();
   activityData.insertChart(chart);
-
 }
 
 function formatReadingList(readingList, dataValidation) {
@@ -165,6 +177,7 @@ function addDataValidation(targetSheet, sourceSheet, targetA1, sourceA1) {
 
 function logActivity()
 {
+  //this function is used to scrape template sheets for strings describing cell content or formulas
   const spreadsheet = SpreadsheetApp.getActiveSpreadsheet() 
   const adt = spreadsheet.getSheetByName('ADT')
   
@@ -174,12 +187,10 @@ function logActivity()
     header_row[0][i] = addQuotes(header_row[0][i])
   }
    Logger.log(header_row)
-  
-  
 }
 
 function addQuotes(value) {
-  
+  //this is a helper function that adds quotes or creates empty strings
   if (value.length = 0) {
    return "\'\'"
   }
