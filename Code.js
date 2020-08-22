@@ -229,19 +229,31 @@ function filterContents() {
   //get the unread contents of the reading list
   contentArray = getReadingListContents()
   unreadArray = contentArray.filter(contentItem => contentItem[6] === "")
+  return unreadArray
 }
 
 function makeDigest() {
   //to make the digest we need
   //get the number of links to send this time
-  var digestLinks = randomizeDigestLinks(getProperty('maxLinks'))
+  var unreadArray = filterContents()
+  var digestLinks = testCondition(unreadArray,randomizeDigestLinks(getProperty('maxLinks')))
+
+  Logger.log(unreadArray.length)
 
   //check the max against the number of unread links if unread << max then set to unread 
   //check for an empty unread Array
 
   Logger.log(digestLinks)
+}
 
-
+function testCondition(unreadArray, digestLinks) {
+//make sure unread array has enough links for the digest 
+if (unreadArray.length < digestLinks) {
+  return unreadArray.length }
+  else
+  {
+  return digestLinks
+  }
 }
 
 
