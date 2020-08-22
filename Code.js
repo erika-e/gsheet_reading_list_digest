@@ -211,17 +211,17 @@ function getReadingListContents() {
   var listSheetData = listSheet.getDataRange() //use this function because getLastRow can get tricked by inconsistent lengths in first column
   var lastRow = listSheetData.getHeight() - 1
 
-  Logger.log(listSheet.getLastColumn())
+  //Logger.log(listSheet.getLastColumn()) width of array is 10
 
   var contentArray = listSheet.getRange(2,1,lastRow, listSheet.getLastColumn()).getValues();
 
   //attempt to add an index without for loop, is that supported in apps script now?
   //https://www.javascripttutorial.net/javascript-multidimensional-array/
 
-  //contentArray.forEach(contentArray => {
-  //  let index = 0
- //   contentArray[7] = index;
-//});
+  contentArray.forEach((contentItem) => {
+    Logger.log(contentItem)
+    //contentArray[7] = index;
+  });
 
   
   return contentArray
@@ -278,11 +278,6 @@ catch(ex){
 }
 }
 
-function test() {
-
-  Logger.log(firstOrLast(200))
-
-}
 
 
 
