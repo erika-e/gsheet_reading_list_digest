@@ -232,13 +232,10 @@ function filterContents() {
   return unreadArray
 }
 
-function makeDigestArray() {
+function makeDigestArray(unreadArray) {
   //create the digest array of rows from unreadArray that will be sent this time
-  var unreadArray = filterContents() 
 
-  Logger.log(unreadArray.length)
-  
-  //apply the first or last logic
+  //apply the first or last logic ... on odd days, oldest entry is sent, on even, latest
   digestArray = []
   digestArray.push(unreadArray.splice(firstLast(unreadArray.length),1))
 
@@ -250,11 +247,33 @@ function makeDigestArray() {
       digestArray.push(unreadArray.splice(Math.round(Math.random() * unreadArray.length),1));
       }
  
-  Logger.log(digestArray.length)
-  Logger.log(unreadArray.length)
+ return digestArray
+}
 
+function makeEmailMessage() {
+  var unreadArray = filterContents() 
 
-  //Logger.log(digestLinks)
+  if (unreadArray.length != 0)
+  {
+    var digestArray = makeDigestArray(unreadArray)
+
+    string = ""
+    for (j=0; j<digestArray.length; j++) {
+      var string = string + format1DArray(digestArray[j])
+    }
+
+    var stringtest = digestArray[0]
+    Logger.log(string)
+
+  }
+  else {
+    return "No unread articles! Go find some more cool stuff to read!"
+  }
+}
+
+function format1DArray(inputArray) {
+  var array = inputArray[0]
+  return "Spreadsheet row is " + array[10] + " and the source is:" + array[2] + " \n " + "Link: " + array[1] + " \n" + "\n"
 }
 
 //add a function wrapping makeDigest that checks for an unreadArray with length = 0 
