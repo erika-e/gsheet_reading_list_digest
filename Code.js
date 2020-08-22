@@ -219,7 +219,7 @@ function getReadingListContents() {
 
   contentArray.forEach((contentItem, index) => {
     //add an index / row number so that once the array is filtered the row can still be sent in the digest
-    contentItem[10] = index+1
+    contentItem[10] = index+2
   });
   
   return contentArray
@@ -232,20 +232,25 @@ function filterContents() {
   return unreadArray
 }
 
-function makeDigest() {
-  //to make the digest we need
-  //get the number of links to send this time
-  var unreadArray = filterContents()
-  var digestLinks = testCondition(unreadArray,randomizeDigestLinks(getProperty('maxLinks')))
+function makeDigestArray() {
+  //create the digest array of rows from unreadArray that will be sent this time
+  var unreadArray = filterContents() 
 
-  //check for an empty unread Array
+  logger.Log(unreadArray)
+  
+  //apply the first or last logic
   digestArray = []
+  digestArray.push(unreadArray[firstLast(unreadArray.length)])
 
-  Logger.log(firstLast(5))
+  //get the number of additional links to send with a random number of additional links
+  var digestLinks = testCondition(unreadArray,randomizeDigestLinks(getProperty('maxLinks'))) - 1
 
-  //digestArray.push(unreadArray[firstOrLast(unreadArray.length)])
-
-  //Logger.log(digestArray)
+  //Add additional links up to digestLinks
+    for (i=1; i<=digestLinks; i++) {
+      digestArray.push(unreadArray[Math.round(Math.random() * unreadArray.length)]);
+      }
+ 
+  Logger.log(digestArray)
 
 
   //Logger.log(digestLinks)
