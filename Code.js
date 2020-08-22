@@ -226,15 +226,10 @@ function getReadingListContents() {
   return contentArray
 }
 
-function filterByIndex(array, number, index) {
-  return array.filter(innerArray => innerArray[index] == number);
-}
-
 function filterContents() {
+  //get the unread contents of the reading list
   contentArray = getReadingListContents()
-
-  unreadArray = filterByIndex(contentArray, 10, 10);
-  Logger.log(unreadArray)
+  unreadArray = contentArray.filter(contentItem => contentItem[6] === "")
 
 }
 
