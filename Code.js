@@ -202,7 +202,6 @@ function addQuotes(value) {
   }
 }
 
-
 function getReadingListContents() {
   //return an array of the reading list contents
   //add a column with the row index to the array
@@ -230,9 +229,20 @@ function filterContents() {
   //get the unread contents of the reading list
   contentArray = getReadingListContents()
   unreadArray = contentArray.filter(contentItem => contentItem[6] === "")
-
 }
 
+function makeDigest() {
+  //to make the digest we need
+  //get the number of links to send this time
+  var digestLinks = randomizeDigestLinks(getProperty('maxLinks'))
+
+  //check the max against the number of unread links if unread << max then set to unread 
+  //check for an empty unread Array
+
+  Logger.log(digestLinks)
+
+
+}
 
 
 function emailString() {
@@ -283,9 +293,7 @@ catch(ex){
 }
 
 
-
-
-function linksToGet(max) {
+function randomizeDigestLinks(max) {
  // use a random number genereator to get up to max links
   try{
   var linkNum = Math.round(Math.random() * (max-1))+1;
@@ -298,44 +306,3 @@ function linksToGet(max) {
   }
 }
 
-function getArray() {
-  // get the range of links represented in the reading list
-  var listSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('ReadingList')
-  var listSheetData = listSheet.getDataRange() //use this function because getLastRow can get tricked by inconsistent lengths in first column
-  var lastRow = listSheetData.getHeight()
-  
-  var linksArray = listSheet.getRange(2,1,lastRow, listSheet.getLastColumn()).getValues();  
-  return linksArray ; 
-}
-
-function checkRead(value) {
-  //return value.length >= 0; 
-  
-  //send links with blank status
-  return value.length < 1 ;
-};
-
-
-function filterLinksArray(linksArray) {
-  //this function takes an array containing list of links and filters the array on 
-  //Column 7 reutrning all rows with no value in column 7
-
-  try {
-    var notReadArray = [];
-    for (i=0; i<linksArray.length; i++) {
-      //Logger.log(linksArray[i][7])
-                  if (checkRead(linksArray[i][7])) {
-                    var tempArray = linksArray[i] 
-                    //Logger.log(tempArray)
-                    tempArray.push(i+2) //this adds the spreadsheet row number from the original spreadsheet to the temp Array
-                    notReadArray.push(tempArray)
-                  }
-      else {}
-    }
-    return notReadArray;
-    
-  }
-  catch(Ex) {
-    Logger.log(Ex)
-  }
-}
