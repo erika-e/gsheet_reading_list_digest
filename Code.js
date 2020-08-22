@@ -236,21 +236,22 @@ function makeDigestArray() {
   //create the digest array of rows from unreadArray that will be sent this time
   var unreadArray = filterContents() 
 
-  logger.Log(unreadArray)
+  Logger.log(unreadArray.length)
   
   //apply the first or last logic
   digestArray = []
-  digestArray.push(unreadArray[firstLast(unreadArray.length)])
+  digestArray.push(unreadArray.splice(firstLast(unreadArray.length),1))
 
   //get the number of additional links to send with a random number of additional links
   var digestLinks = testCondition(unreadArray,randomizeDigestLinks(getProperty('maxLinks'))) - 1
 
   //Add additional links up to digestLinks
     for (i=1; i<=digestLinks; i++) {
-      digestArray.push(unreadArray[Math.round(Math.random() * unreadArray.length)]);
+      digestArray.push(unreadArray.splice(Math.round(Math.random() * unreadArray.length),1));
       }
  
-  Logger.log(digestArray)
+  Logger.log(digestArray.length)
+  Logger.log(unreadArray.length)
 
 
   //Logger.log(digestLinks)
