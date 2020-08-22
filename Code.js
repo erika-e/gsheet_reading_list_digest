@@ -238,13 +238,22 @@ function makeDigest() {
   var unreadArray = filterContents()
   var digestLinks = testCondition(unreadArray,randomizeDigestLinks(getProperty('maxLinks')))
 
-  Logger.log(unreadArray.length)
-
-  //check the max against the number of unread links if unread << max then set to unread 
   //check for an empty unread Array
+  digestArray = []
 
-  Logger.log(digestLinks)
+  Logger.log(firstLast(5))
+
+  //digestArray.push(unreadArray[firstOrLast(unreadArray.length)])
+
+  //Logger.log(digestArray)
+
+
+  //Logger.log(digestLinks)
 }
+
+//add a function wrapping makeDigest that checks for an unreadArray with length = 0 
+//if length = 0 send a different digest message 
+//else, send the digest
 
 function testCondition(unreadArray, digestLinks) {
 //make sure unread array has enough links for the digest 
@@ -286,23 +295,22 @@ function emailString() {
   
 }
 
-function firstOrLast(unreadLength) {
+
+function firstLast(arrayLen) {
   //use date to alternate between sending the first and latest item on the reading list
-try {
+  
   var today = new Date()
   
-  if (today.getDate % 2 == 0)
+  if ((today.getDate() % 2) == 0.0)
   {
-    return unreadLength
+    return (arrayLen - 1)
    }
   else {
-    return 1
+    return 0
   }
 } 
-catch(ex){
-  Logger.log(ex)
-}
-}
+
+
 
 
 function randomizeDigestLinks(max) {
