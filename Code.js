@@ -218,11 +218,10 @@ function getReadingListContents() {
   //attempt to add an index without for loop, is that supported in apps script now?
   //https://www.javascripttutorial.net/javascript-multidimensional-array/
 
-  contentArray.forEach((contentItem) => {
-    Logger.log(contentItem)
-    //contentArray[7] = index;
+  contentArray.forEach((contentItem, index) => {
+    //add an index / row number so that once the array is filtered the row can still be sent in the digest
+    contentItem[10] = index+1
   });
-
   
   return contentArray
 }
