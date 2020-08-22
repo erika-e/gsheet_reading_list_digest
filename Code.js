@@ -226,7 +226,17 @@ function getReadingListContents() {
   return contentArray
 }
 
+function filterByIndex(array, number, index) {
+  return array.filter(innerArray => innerArray[index] == number);
+}
 
+function filterContents() {
+  contentArray = getReadingListContents()
+
+  unreadArray = filterByIndex(contentArray, 10, 10);
+  Logger.log(unreadArray)
+
+}
 
 
 
