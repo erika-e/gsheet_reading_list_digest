@@ -1,6 +1,7 @@
 function setProperties() {
   //this function sets the script properties for access later
   //the email address it will use by default is the user's associated google acount
+  //TODO add the triggers to this first menu
   PropertiesService.getScriptProperties().setProperty('url', SpreadsheetApp.getActiveSpreadsheet().getUrl());
   PropertiesService.getScriptProperties().setProperty('email', Session.getActiveUser().getEmail())
   
@@ -35,7 +36,7 @@ function setupDigest() {
   // this menu function sets up the digest for the first time
   //add popup to warn that this will reset everything
   setProperties()
-  const spreadsheet = SpreadsheetApp.openByUrl(getProperty('url'))
+  //const spreadsheet = SpreadsheetApp.openByUrl(getProperty('url'))
   const activityData = createSheetDeleteExisting('ActivityData')
   const dataValidation = createSheetDeleteExisting('DataValidation');
   const readingList = createSheetDeleteExisting('ReadingList')
@@ -49,6 +50,8 @@ function setupDigest() {
 }
 
 function createSheetDeleteExisting(name) {
+//this function will delete an existing sheet if it exists, and replace it with a sheet of the same name
+
 const spreadsheet = SpreadsheetApp.openByUrl(getProperty('url'))
 const sheet = spreadsheet.getSheetByName(name)
 if (sheet == null) {
@@ -198,3 +201,4 @@ function addQuotes(value) {
    return "\'" + value + "\'" 
   }
 }
+
