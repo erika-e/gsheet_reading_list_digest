@@ -280,7 +280,7 @@ function sendDigestEmail() {
 
 function format1DArray(inputArray) {
   var array = inputArray[0]
-  return "Spreadsheet row is " + array[10] + " and the source is:" + array[2] + " \n " + "Link: " + array[1] + " \n" + "\n"
+  return "Spreadsheet row is " + array[10] + " and the source is: " + array[2] + " \n " + "Link: " + array[1] + "\n" + "\n"
 }
 
 function testCondition(unreadArray, digestLinks) {
@@ -292,37 +292,6 @@ if (unreadArray.length < digestLinks) {
   return digestLinks
   }
 }
-
-
-function emailString() {
-  
-  var unreadArray = filterLinksArray(getArray());
-  var maxLinks = linksToGet(3); // change number of emails here
-  Logger.log(maxLinks)
-  var arrayForEmail = [];
-  
-  //add a first or last entry to the reading list
-  arrayForEmail.push(unreadArray[firstOrLast(unreadArray.length)])
-
-  Logger.log(firstOrLast(unreadArray.length))
-  
-  //Add additional links up to maxLinks - 1
-  for (i=1; i<=maxLinks-1; i++) {
-    arrayForEmail.push(unreadArray[Math.round(Math.random() * unreadArray.length)]);
-    }
-  
-  Logger.log(arrayForEmail.length)
-  
-  var string ="You have "+unreadArray.length+" reading list items unread \n" ;
-  
-  for (j=0; j<arrayForEmail.length; j++) {
-    var string = string + "Spreadsheet row is " + arrayForEmail[j][12] + " and the source is: " + arrayForEmail[j][2] + " \n" + "Link is: " + arrayForEmail[j][1] + " " + arrayForEmail[j][0] +"\n" +"\n" ;
-  }
-  
-  MailApp.sendEmail('erika.swartz@shawinc.com', "Digest with "+(maxLinks)+" to read",string)
-  
-}
-
 
 function firstLast(arrayLen) {
   //use date to alternate between sending the first and latest item on the reading list
