@@ -250,7 +250,10 @@ function makeDigestArray(unreadArray) {
  return digestArray
 }
 
-function makeEmailMessage() {
+function makeEmailBody() {
+  //checks length of unread array 
+  //calls makeDigestArray if reading list is long enough 
+  //returns a string that is the email body
   var unreadArray = filterContents() 
 
   if (unreadArray.length != 0)
@@ -261,9 +264,7 @@ function makeEmailMessage() {
     for (j=0; j<digestArray.length; j++) {
       var string = string + format1DArray(digestArray[j])
     }
-
-    var stringtest = digestArray[0]
-    Logger.log(string)
+    return string
 
   }
   else {
@@ -271,14 +272,16 @@ function makeEmailMessage() {
   }
 }
 
+function sendDigestEmail() {
+  //send the email to the specified address
+  MailApp.sendEmail(getProperty('email'), "Daily Reading List Digest",makeEmailBody())
+
+}
+
 function format1DArray(inputArray) {
   var array = inputArray[0]
   return "Spreadsheet row is " + array[10] + " and the source is:" + array[2] + " \n " + "Link: " + array[1] + " \n" + "\n"
 }
-
-//add a function wrapping makeDigest that checks for an unreadArray with length = 0 
-//if length = 0 send a different digest message 
-//else, send the digest
 
 function testCondition(unreadArray, digestLinks) {
 //make sure unread array has enough links for the digest 
@@ -334,9 +337,6 @@ function firstLast(arrayLen) {
     return 0
   }
 } 
-
-
-
 
 function randomizeDigestLinks(max) {
  // use a random number genereator to get up to max links
