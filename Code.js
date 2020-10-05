@@ -45,8 +45,14 @@ function setupDigest() {
   populateReadingList(readingList);
   populateDataValidation(dataValidation);
   populateActivityData(activityData);
+
   //format and add data validation
   formatReadingList(readingList, dataValidation)
+
+  //create triggers 
+  //add onOpen Trigger
+  //add digest trigger daily 10 am
+
 }
 
 function createSheetDeleteExisting(name) {
@@ -320,3 +326,17 @@ function randomizeDigestLinks(max) {
   }
 }
 
+function createDigestTriggers() {
+    var ss = SpreadsheetApp.getActive();
+    ScriptApp.newTrigger('onOpen')
+        .forSpreadsheet(ss)
+        .onOpen()
+        .create();
+    
+    ScriptApp.newTrigger('sendDigestEmail')
+        .timeBased()
+        .everyDays(1)
+        .atHour(9)
+        .create();
+
+}
