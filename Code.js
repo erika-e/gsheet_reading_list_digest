@@ -26,9 +26,6 @@ function onOpen() {
 
   menu.addItem('Run Initial Setup','setupDigest')
     .addItem('Reset Digest Properties', 'setProperties')
-    .addItem('Add template variable', 'addTemplateVariable')
-    .addSeparator()
-    .addItem('Copy Sheets', 'templateCopier')
     .addToUi();
 }
 
@@ -50,8 +47,7 @@ function setupDigest() {
   formatReadingList(readingList, dataValidation)
 
   //create triggers 
-  //add onOpen Trigger
-  //add digest trigger daily 10 am
+  createDigestTriggers()
 
 }
 
@@ -338,5 +334,4 @@ function createDigestTriggers() {
         .everyDays(1)
         .atHour(9)
         .create();
-
 }
