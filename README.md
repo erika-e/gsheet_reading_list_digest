@@ -31,3 +31,14 @@ The columns which have data validation are:
 - Category
 - Status 
 - Quality
+
+### The ActivityData Sheet
+This sheet captures basic activity data. Like many other people, I'm motivated by a good upward trend.
+
+It contains the follwing summaries:
+| Summary | Contents | 
+| :---        | :---  |
+| Daily Added Counts | This is the count of articles added based on the date in the Date Added coulmn | 
+| Daily Read Counts | This is the count of articles read based on the date in the Date Read column | 
+| Data by Date | This calculates cumulative statistics by date and the total backlog |
+| Data by Week | This calculates the same cumulative statistics by week |
