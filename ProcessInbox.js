@@ -12,7 +12,7 @@ function processInbox() {
      
      for (i=0; i<threadIds.length; i++) {
        //Logger.log(threadIds[i])
-       //processThread(threadIds[i]);
+       processThread(threadIds[i]);
      }
      
    }
