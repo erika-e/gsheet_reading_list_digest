@@ -7,7 +7,7 @@ function setProperties() {
   
   var ui = SpreadsheetApp.getUi();
   var result = ui.prompt(
-      'Running this function will overwrite everything in the readng list. \n Use set properties to change max links. \n Enter the max # of articles in a digest email:',
+      'Enter the max # of articles in a digest email:',
       ui.ButtonSet.OK);
   
   var maxLinks = result.getResponseText();
@@ -24,9 +24,26 @@ function getProperty(key) {
 function onOpen() {
   const menu = SpreadsheetApp.getUi().createMenu('Digest Menu');
 
-  menu.addItem('Run Initial Setup','setupDigest')
+  menu.addItem('Run Initial Setup','initialSetup')
     .addItem('Reset Digest Properties', 'setProperties')
     .addToUi();
+}
+
+function initialSetup() {
+  //this function should call up a UI box and warn the user that it overwrites the script
+   // Display a dialog box with a message and "Yes" and "No" buttons. The user can also close the
+// dialog by clicking the close button in its title bar.
+  var ui = SpreadsheetApp.getUi();
+  var response = ui.alert('This will run the initial setup, which will overwrite all contents in the reading list. \n If you want to change your settings click no and run set properties. \n Are you sure you want to continue?', 
+ui.ButtonSet.YES_NO);
+
+// Process the user's response.
+if (response == ui.Button.YES) {
+  Logger.log('The user clicked "Yes."')
+  setupDigest();
+} else {
+  Logger.log('The user clicked "No" or the close button in the dialog\'s title bar.')
+}
 }
 
 function setupDigest() {
