@@ -11,8 +11,8 @@ function processInbox() {
     var threadIds = getEmailThreadIds(); 
      
      for (i=0; i<threadIds.length; i++) {
-       Logger.log(threadIds[i])
-       processThread(threadIds[i]);
+       //Logger.log(threadIds[i])
+       //processThread(threadIds[i]);
      }
      
    }
@@ -73,9 +73,8 @@ function processInbox() {
      //extract the content link from the body 
      //package the links in an array 
      
-     var tweetRegex = new RegExp('<div><a href="https:\/\/twitter\.com\/.*\/status\/\\d*\\?s=\\d*"','m'); 
-     var innerRegex = new RegExp('https:\/\/twitter\.com\/.*\/status\/\\d*\\?s=\\d*')
-     var tweetLink = innerRegex.exec(tweetRegex.exec(body));
+     var tweetRegex = new RegExp('https:\/\/twitter\.com\/[A-Za-z0-9_]{4,15}\/status\/[0-9]*[?]{1}s=[0-9][0-9]'); 
+     var tweetLink = tweetRegex.exec(body);
      
      var contentRegex = new RegExp('https:\/\/t\.co\/.{10}');
      var contentLink = contentRegex.exec(body);
