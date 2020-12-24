@@ -1,6 +1,19 @@
 # gsheet_reading_list_digest
 This javascript project integrates with a google sheet to generate a daily digest email from a backlog of links to read. 
 
+## How to Get Started
+
+This was designed to be used with no coding background! Follow the simple steps below to get started. 
+
+1. Create a new google sheet with the gmail account you want to use for the emails 
+2. Click on `Tools` > `Google Apps Script` 
+3. Paste the entire contents of the `Code.js` file into the script editor
+4. Use the `Run` menu on the script editor window to run the onOpen function
+5. When prompted, authorize the script
+6. A new menu, `Digest Menu`, will now appear on your google sheet
+7. Run the menu function `Run Initial Setup`
+
+
 ### Columns in the ReadingList Sheet 
 
 The reading list sheet drives the update emails and allows you to categorize, rate, and manage your personalized digest content. 
@@ -31,3 +44,14 @@ The columns which have data validation are:
 - Category
 - Status 
 - Quality
+
+### The ActivityData Sheet
+This sheet captures basic activity data. Like many other people, I'm motivated by a good upward trend.
+
+It contains the follwing summaries:
+| Summary | Contents | 
+| :---        | :---  |
+| Daily Added Counts | This is the count of articles added based on the date in the Date Added coulmn | 
+| Daily Read Counts | This is the count of articles read based on the date in the Date Read column | 
+| Data by Date | This calculates cumulative statistics by date and the total backlog |
+| Data by Week | This calculates the same cumulative statistics by week |
