@@ -7,12 +7,24 @@ This was designed to be used with no coding background! Follow the simple steps 
 
 1. Create a new google sheet with the gmail account you want to use for the emails 
 2. Click on `Tools` > `Script Editor` 
-3. Paste the entire contents of the `Code.js` file into the script editor
-4. Use the `Run` menu on the script editor window to run the onOpen function
-5. When prompted, authorize the script
-6. A new menu, `Digest Menu`, will now appear on your google sheet
-7. Run the menu function `Run Initial Setup`
+3. Remove the blank myFunction function that is in the `Code.js` default file
+4. Paste the entire contents of the `Code.js` file into the script editor
+5. Use the drpodown just left of execution log to select the onOpen function and then click `Run`
+6. When prompted, authorize the script
+7. An execution log will pop up and tell you when the execution is complete
+8. Click back over to your spreadsheet. A new menu, `Digest Menu`, will now appear.
+9. Run the menu function `Run Initial Setup`
 
+## How the Reading List Digest Works
+
+Each day, the digest will email you a random number of articles between 1 and the max # you specified during setup. This takes the guesswork out of what to read when and encourages daily learning.
+
+Articles stay on the backlog --and can show up in the digest -- until you update the date read and status columns.
+
+The reading list has 3 sheets:
+- ReadingList - where you add articles and can make notes on their content, quality, and category
+- DataValidation - a helper sheet which encourages you to re-use categories and helps avoid typos when updating ReadingList
+- ActivityData - like most people, I'm motivated by progress! This sheet will track and graph your articles read and the size of your backlog.
 
 ### Columns in the ReadingList Sheet 
 
