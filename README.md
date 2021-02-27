@@ -6,7 +6,7 @@ This javascript project integrates with a google sheet to generate a daily diges
 This was designed to be used with no coding background! Follow the simple steps below to get started. 
 
 1. Create a new google sheet with the gmail account you want to use for the emails 
-2. Click on `Tools` > `Google Apps Script` 
+2. Click on `Tools` > `Script Editor` 
 3. Paste the entire contents of the `Code.js` file into the script editor
 4. Use the `Run` menu on the script editor window to run the onOpen function
 5. When prompted, authorize the script
