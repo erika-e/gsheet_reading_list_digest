@@ -1,3 +1,11 @@
+function onOpen() {
+  const menu = SpreadsheetApp.getUi().createMenu('Digest Menu');
+
+  menu.addItem('Run Initial Setup','initialSetup')
+    .addItem('Reset Digest Properties', 'setProperties')
+    .addToUi();
+}
+
 function setProperties() {
   //this function sets the script properties for access later
   //the email address it will use by default is the user's associated google acount
@@ -7,7 +15,7 @@ function setProperties() {
   
   var ui = SpreadsheetApp.getUi();
   var result = ui.prompt(
-      'Enter the max # of articles in a digest email:',
+      'In the box below, enter the maximum number of articles you want to get in a single daily digest:',
       ui.ButtonSet.OK);
   
   var maxLinks = result.getResponseText();
@@ -20,14 +28,6 @@ function getProperty(key) {
   const returnValue = PropertiesService.getScriptProperties().getProperty(key)
   return returnValue;
   }
-
-function onOpen() {
-  const menu = SpreadsheetApp.getUi().createMenu('Digest Menu');
-
-  menu.addItem('Run Initial Setup','initialSetup')
-    .addItem('Reset Digest Properties', 'setProperties')
-    .addToUi();
-}
 
 function initialSetup() {
   //this function should call up a UI box and warn the user that it overwrites the script
