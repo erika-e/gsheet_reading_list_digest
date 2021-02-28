@@ -1,11 +1,17 @@
-//add old code here and start updating
+/*I chose not to refactor this, so it is more or less the same as the original I wrote in a hurry.
 
-//get an email thread from the Id list that matches the tweet pattern 
-//parse the body to get a link to the tweet 
-//parse the body to get a link to any content 
-//write a row to the reading list backlog sheet 
-//mark the email read 
-//archive it 
+The rough outline of what it does is:
+- get an email thread from the Id list that matches the tweet pattern 
+- parse the body to get a link to the tweet 
+- parse the body to get a link to any content 
+- write a row to the reading list backlog sheet 
+- mark the email read 
+- archive it 
+
+To use this functionality, add a trigger that runs processInbox onOpen from the spreadsheet.
+I suppose you could also run it on a time based trigger.
+
+*/
 
 function processInbox() {
     var threadIds = getEmailThreadIds(); 
