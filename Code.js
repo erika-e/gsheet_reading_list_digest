@@ -100,7 +100,7 @@ function populateReadingList(readingList) {
   const readingListHeaders = [['Source Link', 'Link', 'Source', 'Date Added', 'Date Read', 'Category', 'Status', 'Quality', 'Short Description', 'Comment']];
   readingList.getRange(1, 1, 1, 10).setValues(readingListHeaders);
 
-  const readingListData = [['https://veekaybee.github.io/2019/02/13/data-science-is-different/', 'Default', currentDateSerial(), currentDateSerial(), 'DataScience', 'Read', '', 'Data Science is Different Now'],
+  const readingListData = [['https://veekaybee.github.io/2019/02/13/data-science-is-different/', 'Default', currentDateSerial()-1, currentDateSerial()-1, 'DataScience', 'Read', '', 'Data Science is Different Now'],
   ['https://counting.substack.com/p/data-cleaning-is-analysis-not-grunt', 'Default', currentDateSerial(), '', 'DataScience', '', '', 'Data Cleaning is Analysis, Not Grunt Work'],
   ['http://allendowney.blogspot.com/2013/08/are-my-data-normal.html', 'Default', currentDateSerial(), '', 'Statistics', '', '', 'Are Your Data Normal? Hint: no'],
   ['http://aimeets.design/design-challenges/', 'Default', currentDateSerial(), '', 'AI/ML', '', '', 'AI Design Toolkit w/ Ethics'],
