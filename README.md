@@ -9,11 +9,13 @@ This was designed to be used with no coding background! Follow the simple steps 
 2. Click on `Tools` > `Script Editor` 
 3. Remove the blank myFunction function that is in the `Code.js` default file
 4. Paste the entire contents of the `Code.js` file into the script editor
-5. Use the drpodown just left of execution log to select the onOpen function and then click `Run`
+5. Use the dropdown just left of execution log to select the onOpen function and then click `Run`
 6. When prompted, authorize the script
 7. An execution log will pop up and tell you when the execution is complete
 8. Click back over to your spreadsheet. A new menu, `Digest Menu`, will now appear.
 9. Run the menu function `Run Initial Setup`
+
+That's it! A set of default links will have populated your reading list. You can read these, or replace with your own content.
 
 ## How the Reading List Digest Works
 
@@ -67,3 +69,13 @@ It contains the follwing summaries:
 | Daily Read Counts | This is the count of articles read based on the date in the Date Read column | 
 | Data by Date | This calculates cumulative statistics by date and the total backlog |
 | Data by Week | This calculates the same cumulative statistics by week |
+
+## Cautions and Notes
+
+Don't change the columns! The spreadsheet should do ok if you insert and delete rows, but references to the columns the script needs will break or behave incorrectly if you insert columns.
+
+## ProcessInbox.js
+
+I included the code I use to scrape tweets I've emailed to myself out of my inbox. I'm sure there's a better way to get content from Twitter onto the reading list. I didn't update this code when I published this. 
+
+There's some notes at the top of the file on how to implement this functionality if you want. I'm not sure it will work for everyone -- the format of the emailed Tweet has changed at least once.
