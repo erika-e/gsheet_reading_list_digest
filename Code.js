@@ -363,6 +363,8 @@ function randomizeDigestLinks(max) {
 }
 
 function createDigestTriggers() {
+    deleteTriggers();
+
     var ss = SpreadsheetApp.getActive();
     ScriptApp.newTrigger('onOpen')
         .forSpreadsheet(ss)
@@ -375,3 +377,20 @@ function createDigestTriggers() {
         .atHour(9)
         .create();
 }
+
+function deleteTriggers(){
+  var triggers = ScriptApp.getProjectTriggers();
+
+  triggers.forEach(function(trigger){
+
+    try{
+      ScriptApp.deleteTrigger(trigger);
+    } catch(e) {
+      throw e.message;
+    };
+
+    Utilities.sleep(1000);
+
+  });
+
+};
