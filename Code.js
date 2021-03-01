@@ -3,6 +3,7 @@ function onOpen() {
 
   menu.addItem('Run Initial Setup','initialSetup')
     .addItem('Reset Digest Properties', 'setProperties')
+    .addItem('Send Email Now', 'sendDigestEmail')
     .addToUi();
 }
 
