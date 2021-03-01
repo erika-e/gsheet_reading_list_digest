@@ -1,5 +1,5 @@
 # gsheet_reading_list_digest
-This javascript project integrates with a google sheet to generate a daily digest email from a backlog of links to read. 
+This project allows you to curate a customized daily reading list from a backlog of links you'd like to read. It uses a google sheet and google apps script to automate the digest.
 
 ## How to Get Started
 
@@ -15,7 +15,9 @@ This was designed to be used with no coding background! Follow the simple steps 
 8. Click back over to your spreadsheet. A new menu, `Digest Menu`, will now appear.
 9. Run the menu function `Run Initial Setup`
 
-That's it! A set of default links will have populated your reading list. You can read these, or replace with your own content.
+That's it! A set of default links has been populated to the reading list. You can read these, or replace with your own content.
+
+Your first digest email will show up the next day at 9 am. You can use the digest menu to send an email immediately if you'd like, just choose `Send Email Now` from the menu.
 
 ## How the Reading List Digest Works
 
