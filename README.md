@@ -1,5 +1,5 @@
 # gsheet_reading_list_digest
-This project allows you to curate a customized daily reading list from a backlog of links you'd like to read. It uses a google sheet and google apps script to automate the digest.
+This project allows you to curate a customized daily reading list from a backlog of links you'd like to read. It uses a google sheet and google apps script to automate the digest. I wrote a blog post about how this came to be, [which you can read here](https://betterwithdata.substack.com/p/learning-superpower)
 
 ## How to Get Started
 
