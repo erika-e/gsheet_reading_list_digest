@@ -316,13 +316,29 @@ function makeEmailBody() {
 
 function sendDigestEmail() {
   //send the email to the specified address
-  MailApp.sendEmail(getProperty('email'), "Daily Reading List Digest",makeEmailBody())
+  MailApp.sendEmail({
+    to: getProperty('email'), 
+    subject: "Daily Reading List Digest",
+    htmlBody: makeEmailBody()
+  })
+}
 
+function getRowUrl(row) {
+  //modified from https://webapps.stackexchange.com/a/93307
+  var SS = SpreadsheetApp.getActiveSpreadsheet();
+  var ss = SS.getActiveSheet();
+  var url = '';
+  url += SS.getUrl();
+  url += '#gid=';
+  url += ss.getSheetId(); 
+  url += '&range=A';
+  url += row;
+  return url;
 }
 
 function format1DArray(inputArray) {
   var array = inputArray[0]
-  return "Spreadsheet row is " + array[10] + " and the source is: " + array[2] + " \n " + "Link: " + array[1] + "\n" + "\n"
+  return "<p>Spreadsheet row is <a href=\"" + getRowUrl(array[10]) + "\">" + array[10] + "</a> and the source is: " + array[2] + "<br>" + "Link: " + array[1] + "</p>"
 }
 
 function testCondition(unreadArray, digestLinks) {
